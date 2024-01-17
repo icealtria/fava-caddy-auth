@@ -1,0 +1,29 @@
+---
+version: "3.0"
+services:
+  fava: # dont change this
+    container_name: fava
+    image: yegle/fava
+    #     ports:
+    #       - 5000:5000
+    environment:
+      - BEANCOUNT_FILE=/bean/main.bean
+    volumes:
+      - <beancount_dir>:/bean
+    restart: unless-stopped
+    networks:
+      - fava
+
+  caddy:
+    container_name: fava-caddy-auth
+    image: icealtria/fava-caddy-auth:master
+    env_file:
+      - stack.env
+    ports:
+      - 5001:5001
+    restart: unless-stopped
+    networks:
+      - fava
+
+networks:
+  fava:
