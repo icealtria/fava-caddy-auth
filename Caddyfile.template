@@ -1,0 +1,6 @@
+:5001 {
+  basicauth / {
+    $USERNAME $HASHED_PASSWORD $SALT
+  }
+  reverse_proxy http://fava:5000
+}
